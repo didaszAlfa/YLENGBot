@@ -1,9 +1,7 @@
 package YLENGbot;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 
 public class MessageUser {
     public static void AnswerToUser(Long chatId, String text, BotRegisterer bot) {
