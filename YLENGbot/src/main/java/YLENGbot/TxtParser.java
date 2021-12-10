@@ -1,5 +1,6 @@
 package YLENGbot;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ public class TxtParser {
     static public void GatherTasks() {
         try(FileReader task = new FileReader("C:\\Users\\Я\\IdeaProjects\\YLENGbot\\src\\main\\task\\task.txt")) {
             int c;
-            StringBuilder str = new StringBuilder();
-            StringBuilder answ = new StringBuilder();
-            var strId = 0;
+            int strId = 0;
+            var str = new StringBuilder();
+            var answ = new StringBuilder();
             while((c = task.read()) != -1) {
                 if ((char)c != '(') {
                     str.append((char) c);
@@ -23,13 +24,11 @@ public class TxtParser {
                     while ((c = task.read()) != ')') {
                         answ.append((char)c);
                     }
-                }
-                if ((char)c == ')') {
                     allQuestions.add(str.toString());
                     answers.put(strId, answ.toString());
                     strId = strId + 1;
-                    str = new StringBuilder();
-                    answ = new StringBuilder();
+                    str.setLength(0);
+                    answ.setLength(0);
                 }
             }
         }
