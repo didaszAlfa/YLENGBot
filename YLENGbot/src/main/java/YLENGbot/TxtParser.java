@@ -1,6 +1,7 @@
 package YLENGbot;
 
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ public class TxtParser {
     private static final HashMap<Integer, String> answers = new HashMap<>();
 
     public static void GatherTasks() {
-        try(FileReader task = new FileReader("C:\\Users\\Я\\IdeaProjects\\YLENGbot\\src\\main\\task\\task.txt")) { // Изменить путь чтобы на любом ПК работало.
+        String basePath = new File("src\\main\\resources\\task\\task.txt").getAbsolutePath();
+        try(FileReader task = new FileReader(basePath)) { // Изменить путь чтобы на любом ПК работало.
+            System.out.print(basePath);
             int c;
             var strId = 0;
             var str = new StringBuilder();
