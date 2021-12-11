@@ -4,12 +4,11 @@ package YLENGbot;
 import java.util.HashMap;
 
 public class UsersTestState {
-    public static HashMap<Long, TestGenerator> chatIds = new HashMap<>();
-    public static HashMap<Long, UsersTestState> users = new HashMap<>();
+    private static final HashMap<Long, TestGenerator> chatIds = new HashMap<>();
+    private static final HashMap<Long, UsersTestState> registeredUsers = new HashMap<>();
 
     private boolean isStartLvlStateEnabled = false;
-    private boolean isFirstTestLvlAnswer = true;
-    private int questionCounter = 0;
+    private int answeredQuestionCounter = 0;
     private double score = 0;
 
     public void enableStartLvlState() {
@@ -23,20 +22,21 @@ public class UsersTestState {
     public boolean checkIsStartLvlStateEnabled() {
         return this.isStartLvlStateEnabled;
     }
-    public void registerFirstTestLvlAnswer() {
-        this.isFirstTestLvlAnswer = false;
-    }
 
     public boolean checkIsFirstTestLvlAnswer() {
-        return this.isFirstTestLvlAnswer;
+        var answersAmount = 1;
+        System.out.print("First  " + answersAmount + " : " + this.answeredQuestionCounter + "\n");
+        return this.answeredQuestionCounter == answersAmount;
+    }
+
+    public boolean checkIsLastTestLvlAnswer() {
+        var answersAmount = TxtParser.getAllAnswers().size() + 1;
+        System.out.print("Last  " + answersAmount + " : " + this.answeredQuestionCounter + "\n");
+        return this.answeredQuestionCounter == answersAmount;
     }
 
     public void incrementQuestionCounter() {
-        this.questionCounter++;
-    }
-
-    public int getQuestionCounter() {
-        return this.questionCounter;
+        this.answeredQuestionCounter++;
     }
 
     public void addScores() {
@@ -49,6 +49,14 @@ public class UsersTestState {
 
     public static void registerUser(long chatId, TestGenerator question, UsersTestState user) {
         UsersTestState.chatIds.put(chatId, question);
-        UsersTestState.users.put(chatId, user);
+        UsersTestState.registeredUsers.put(chatId, user);
+    }
+
+    public static HashMap<Long, TestGenerator> getChatIds() {
+        return chatIds;
+    }
+
+    public static HashMap<Long, UsersTestState> getRegisteredUsers() {
+        return registeredUsers;
     }
 }

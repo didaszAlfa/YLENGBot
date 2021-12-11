@@ -5,14 +5,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class MessageUser {
     public static void AnswerToUser(Long chatId, String text, BotRegisterer bot) {
-                try {
-                    bot.execute(SendMessage.builder()
-                            .chatId(String.valueOf(chatId))
-                            .text(text)
-                            .build());
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
+        try {
+            bot.execute(SendMessage.builder()
+                    .chatId(String.valueOf(chatId))
+                    .text(text)
+                    .build());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void AnswerToUser(Long chatId, double grade, BotRegisterer bot) {

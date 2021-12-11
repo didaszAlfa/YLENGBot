@@ -6,21 +6,26 @@ import java.util.Random;
 
 public class TestGenerator {
 
-    ArrayList<Integer> completed = new ArrayList<>();
-    int qInd = 0;
+    private final ArrayList<Integer> completed = new ArrayList<>();
+    private int currentTaskId = 0;
+
     public String GetRandomTask() {
-        Random rand = new Random();
-        int nextTaskId;
+        var rand = new Random();
+        var taskId = 0;
         String rndTask;
         while (true) {
-            nextTaskId = rand.nextInt(TxtParser.allQuestions.size());
-            if (!this.completed.contains(nextTaskId)) {
-                rndTask = TxtParser.allQuestions.get(nextTaskId);// loop???
-                this.completed.add(nextTaskId);
-                this.qInd = nextTaskId;
+            taskId = rand.nextInt(TxtParser.getAllAnswers().size());
+            if (!this.completed.contains(taskId)) {
+                rndTask = TxtParser.getAllQuestions().get(taskId);// loop???
+                this.completed.add(taskId);
+                this.currentTaskId = taskId;
                 break;
             }
         }
         return rndTask;
+    }
+
+    public int getCurrentTaskId() {
+        return this.currentTaskId;
     }
 }
